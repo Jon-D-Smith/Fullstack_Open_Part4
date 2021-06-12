@@ -1,4 +1,4 @@
-require('dotenv').config()
+const config = require('../utils/config')
 const mongoose = require('mongoose')
 
 
@@ -11,6 +11,6 @@ const blogSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = process.env.MONGO_URI
+const mongoUrl = config.MONGO_URI
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 

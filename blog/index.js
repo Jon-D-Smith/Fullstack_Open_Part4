@@ -1,4 +1,4 @@
-require('dotenv').config()
+const config = require('./utils/config')
 const http = require('http')
 const express = require('express')
 const app = express()
@@ -26,7 +26,7 @@ app.post('/api/blogs', (request, response) => {
     })
 })
 
-const PORT = 3003
+const PORT = config.PORT || config.MONGO_URI
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
