@@ -12,8 +12,23 @@ const dummy = (blogs) => {
      
     return total
     }
+
+
+    const favoriteBlog = (blogs) => {
+      let mostLiked
+      let currentTop = 0
+      blogs.map(blog => {
+        if(currentTop < blog.likes){
+          currentTop = blog.likes
+          mostLiked = blog
+        }
+        return mostLiked
+      })
+      return mostLiked
+    }
   
   module.exports = {
     dummy,
-    totalLikes
+    totalLikes,
+    favoriteBlog
   }
