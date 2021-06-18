@@ -17,11 +17,8 @@ blogRouter.post('/', async (request, response) => {
       const newBlog = await blog.save()
     } 
     
-    if(!title){
+    if(!title || !url){
         await response.send({msg: "please include all requested information"})
-        return response.status(400).end()
-    } else if(!url){
-      await response.send({msg: "please include all requested information"})
         return response.status(400).end()
     }
     
