@@ -62,6 +62,20 @@ test('if likes is missing, it is set to 0', async () => {
     expect(blogsInDB[blogInDB].likes).toBe(0)
 })
 
+test('if new post is missing title or URL it returns 400 bad request', async () => {
+    const newBlog = {
+        title: "supper de dupper",
+        author: "Roger Manlier than though"
+        
+      } 
+
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)
+        
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
