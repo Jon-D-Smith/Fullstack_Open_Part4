@@ -27,6 +27,25 @@ test('blogs are returned as JSON and correct number of blogs returned', async ()
     
 })
 
+test('blog successfully added by post route', async () =>{
+    
+    const newBlog = {
+        title: "supper de dupper",
+        author: "Roger Manly",
+        url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+        likes: 7,
+        __v: 0
+      }  
+
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+
+        const blogsAtEnd = await helper.blogsInDb()
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
