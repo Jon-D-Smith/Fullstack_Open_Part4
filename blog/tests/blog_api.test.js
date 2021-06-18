@@ -46,7 +46,21 @@ test('blog successfully added by post route', async () =>{
         expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 })
 
+test('if likes is missing, it is set to 0', async () => {
+    const newBlog = {
+        title: "supper de dupper",
+        author: "Roger Manlier than though",
+        url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html"
+      } 
 
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        
+    const blogsInDB = await helper.blogsInDb()
+    const blogInDB = blogsInDB.length -1
+    expect(blogsInDB[blogInDB].likes).toBe(0)
+})
 
 afterAll(() => {
     mongoose.connection.close()
