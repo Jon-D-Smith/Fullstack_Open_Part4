@@ -15,10 +15,20 @@ blogRouter.post('/', async (request, response) => {
     if(!likes){
       blog.likes = 0
       const newBlog = await blog.save()
+    } 
+    
+    if(!title){
+        await response.send({msg: "please include all requested information"})
+        return response.status(400).end()
+    } else if(!url){
+      await response.send({msg: "please include all requested information"})
+        return response.status(400).end()
     }
+    
   
-   const newBlog = await blog.save()
-      
+  const newBlog = await blog.save()
+    
+   
   return response.status(201).json(newBlog)
      
   })
